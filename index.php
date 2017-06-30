@@ -1,128 +1,205 @@
 <!DOCTYPE html>
 <html>
-
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Test Web Page</title>
+        <title>TEST|PROJECT</title>
     </head>
+    <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="lib/w3.css">
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
+    <style>
+        body,h1,h5 {font-family: "Raleway", sans-serif}
+        body, html {height: 100%}
+        .bgimg {
+            background-image: url("images/one.jpeg");
+            min-height: 100%;
+            background-position: center;
+            background-size: cover;
+        }
+    </style>
+
+
     <body>
 
-        <div class="w3-container w3-teal">
-            <h1>Maintenance Management System</h1>
-        </div>
+        <div class="bgimg w3-display-container w3-text-black w3-border-white">
+            <div class="w3-display-middle w3-jumbo">
+                <p>MONO ⛌ </p>
 
-        <div class="w3-container w3-border-light-gray">
-            <h3>Insert your maintenance request here..</h3>
-        </div>
-
-        <div class="w3-bar w3-black w3-margin-bottom">
-            <button class="w3-bar-item w3-button" onclick="window.open('http://www.polyvore.com')">Polyvore</button>
-            <button class="w3-bar-item w3-button" onclick="window.open('http://www.hm.com')">H&M</button>
-        </div>
-
-        <div class="w3-container">
-            <button class="w3-button" onclick="document.getElementById('time').innerHTML=Date()">Time</button>
-            <p id="time"></p>
-        </div>
-
-        <div class="w3-row-padding w3-content" style="max-width: 1400px">
-            <div class="w3-half">
-                <img src="images/ch4.jpg" style="width: 50%">
             </div>
+            <div class="w3-display-topleft w3-container w3-xlarge">
+                <p><button onclick="document.getElementById('signup').style.display='block'" class="w3-button w3-black">sign up</button></p>
+                <p><button onclick="document.getElementById('login').style.display='block'" class="w3-button w3-black">login</button></p>
+            </div>
+            <div class="w3-display-bottomleft w3-container w3-text-white">
+                <p class="w3-xlarge">monday - friday 10-23 | saturday 14-02</p>
+                <p class="w3-large">42 village St, New York</p>
+                <p>powered by <a href="https://www.polyvore.com" target="_blank">riuscita</a></p>
+            </div>
+        </div>
 
-            <div class="w3-half">
-                <div class="w3-container w3-hover-text-light-green" style="width: 500px">
-                    <h2>Request repair</h2>
+        <!-- Sign up Modal -->
+        <div id="signup" class="w3-modal">
+            <div class="w3-modal-content w3-animate-zoom">
+                <div class="w3-container w3-black">
+                    <span onclick="document.getElementById('signup').style.display='none'" class="w3-button w3-display-topright w3-large">x</span>
+                    <h1>Sign up</h1>
                 </div>
+                <div class="w3-container">
+                    <p>Please fill this form:</p>
+                    <form>
+                        <p><input class="w3-input w3-padding-16 w3-border" type="text" placeholder="Name" id="name" required name="name"></p>
+                        <p><input class="w3-input w3-padding-16 w3-border" type="number" placeholder="University ID" id="uid" required name="uid"></p>
+                        <p><select class="w3-select w3-padding-16 w3-border" id="dsg" required name="dsg" onchange="selectBox()">
+                                <option value="" disabled selected>Choose your designation</option>
+                                <option value="Lecturer">Lecturer</option>
+                                <option value="Visiting Lecturer">Visiting Lecturer</option>
+                                <option value="Junior Lecturer">Junior Lecturer</option>
+                                <option value="Lab Assistant">Lab Assistant</option>
+                                <option value="Office worker">Office worker</option>
+                            </select></p>
+                        <p><input class="w3-input w3-padding-16 w3-border" type="password" placeholder="Type a password" id="password" required name="psw"></p>
+                        <p><input class="w3-input w3-padding-16 w3-border" type="password" placeholder="Re type Password" id="repassword" required name="rpsw"></p>
+                        <p><button class="w3-button" type="button" name="signupBtn" onclick="msg(this.form)">Done</button></p>
 
-                <div class="w3-card-4" style="width: 500px">
-                    <form class="w3-container" action="index.php" method="post">
-                        <p>
-                            <label class="w3-label w3-margin-top">ID</label>
-                            <input class="w3-input" type="text" name="ID"></p>
+                        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+                        <script type ="text/javascript" language="javascript">
+                            function msg(form){
+                                var ps=document.getElementById('password').value;
+                                var rps=document.getElementById('repassword').value;
+                                var uidt=document.getElementById('uid').value;
+                                var namet=document.getElementById('name').value;
+                                var dsge=document.getElementById("dsg").value;
+                                
+                                document.getElementById('password').value="";
+                                document.getElementById('repassword').value="";
+                                document.getElementById('uid').value="";
+                                document.getElementById('name').value="";
+                                document.getElementById("dsg").value="";
+                                
+                                if(ps==rps){
+                                    var myData = {"uid": uidt, "name": namet,"dsg":dsge,"psw":ps};
+                                    $.ajax({
+                                        url: "signupAction.php",
+                                        type: "POST",
+                                        data: myData,
+                                        success: function(data) {
+                                            $("#responseDiv").html(data);
+                                        }  
+                                    });
 
-                        <p>
-                            <label class="w3-label">Name</label>
-                            <input class="w3-input" type="text" name="Name"></p>
-
-                        <p>
-                            <label class="w3-label w3-margin-bottom">Department</label>
-                            <input class="w3-input" type="text" name="Dep"></p>
-                        <p>
-                            <label class="w3-label">Select the repair type</label></p>
-                        <p>
-                            <input type="radio" name="radio" value="electrical">
-                            <label class="w3-label">Electrical</label>
-
-                            <input type="radio" name="radio" value="water">
-                            <label class="w3-label">Water</label>
-
-                            <input type="radio" class="w3-margin-bottom" name="radio" value="civil">
-                            <label class="w3-label">Civil</label></p>
-
-                        <p>
-                            <button class="w3-button" name="done">Done</button></p>
+                                    document.getElementById('signup').style.display='none';
+                                    document.getElementById('message').style.display='block';
+                                }else{
+                                    document.getElementById('error').style.display='block';
+                                }
+                            }
+                        </script>
 
                     </form>
                 </div>
-
             </div>
         </div>
 
+
+        <!-- Login Modal -->
+        <div id="login" class="w3-modal">
+            <div class="w3-modal-content w3-animate-zoom">
+                <div class="w3-container w3-black">
+                    <span onclick="document.getElementById('login').style.display='none'" class="w3-button w3-display-topright w3-large">x</span>
+                    <h1>Login</h1>
+                </div>
+                <div class="w3-container">
+                    <form action="/action_page.php" target="_blank">
+                        <p><input class="w3-input w3-padding-16 w3-border" type="number" placeholder="University ID" id="uuid" required name="uuid"></p>
+                        <p><input class="w3-input w3-padding-16 w3-border" type="password" placeholder="Password" id="upassword" required name="upassword"></p>
+                        <p><button class="w3-button" type="button" name="loginBtn" onclick="login()">Login</button></p>
+
+
+                        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+                        <script type ="text/javascript" language="javascript">
+                            function login(){
+                                var ps=document.getElementById('upassword').value;
+                                var idt=document.getElementById('uuid').value;
+                                
+                                document.getElementById('upassword').value="";
+                                document.getElementById('uuid').value="";
+                                
+                                var myData = {"luid": idt};
+                                $.ajax({
+                                    url: "loginAction.php",
+                                    type: "POST",
+                                    data: myData,
+                                    success: function(res) {
+                                        //$("#responseDiv").html(data);
+                                        if (!$.trim(res)){
+                                            alert('no such user..');
+                                        }else{
+                                            if ($.trim(res)==ps){
+                                                alert("Sucess");
+                                            }else{
+                                                alert("Incorrect password");
+                                                document.getElementById('login').style.display='none';
+                                                document.getElementById('error').style.display='block';
+                                            }
+                                        }
+                                    }  
+                                });
+                                
+                                
+                            }
+                        </script>
+
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <!-- Message Modal -->
+        <div id="message" class="w3-modal">
+            <div class="w3-modal-content w3-animate-zoom">
+                <div class="w3-container w3-black">
+                    <span onclick="document.getElementById('message').style.display='none'" class="w3-button w3-display-topright w3-large">x</span>
+                    <h1>Success</h1>
+                </div>
+                <div class="w3-container">
+                    <p>Sign up Success !! Please login</p>
+                    <p><button class="w3-button" type="button" name="loginBtn" onclick="msgLogin(this.form)">login</button></p>
+
+                    <script>
+                        function msgLogin(form){
+                            document.getElementById('message').style.display='none';
+                            document.getElementById('login').style.display='block';
+                        }
+                    </script>
+                </div>
+            </div>
+        </div>
+
+        <!-- Error Modal -->
+        <div id="error" class="w3-modal">
+            <div class="w3-modal-content w3-animate-zoom">
+                <div class="w3-container w3-black">
+                    <span onclick="document.getElementById('error').style.display='none'" class="w3-button w3-display-topright w3-large">x</span>
+                    <h1>Error</h1>
+                </div>
+                <div class="w3-container">
+                    <p>Incorrect password. Please login again</p>
+                    <p><button class="w3-button" type="button" name="loginBtn" onclick="errorFunc(this.form)">Login</button></p>
+
+                    <script>
+                        function errorFunc(form){
+                            document.getElementById('error').style.display='none';
+                            document.getElementById('login').style.display='block';
+                        }
+                    </script>
+                </div>
+            </div>
+        </div>
+
+
         <?php
-
-        
-        function request_repair() {
-
-            $host = "localhost";
-            $user = "root";
-            $database = "firsttest";
-
-            $con = mysql_connect($host, $user, NULL);
-            mysql_select_db($database);
-            echo("Connect sucessfully !");
-
-            $id = $_POST["ID"];
-            $name = $_POST["Name"];
-            $dep = $_POST["Dep"];
-            $type = $_POST["radio"];
-
-            if (!$con) {
-                die("Connect faild" . mysqli_connect_error());
-            }
-
-            $sql = "INSERT INTO requesttable VALUES('$id','$name','$dep','$type')";
-            $sq = mysql_query($sql);
-            echo $sq;
-            if (!$sq) {
-                echo mysql_error();
-            } else {
-                echo 'Added successfully !';
-
-                $to = 'ktl.desilva@gmail.com';
-                $subject = 'TEST';
-                $message = 'Hi! , Email service Done ...have a nice day :)';
-                $email = 'riuscitacom@gmail.com';
-                $headers = 'From: ' . $email . "\r\n" .
-                        'Reply-To: ' . $email . "\r\n" .
-                        'X-Mailer: PHP/' . phpversion();
-
-                $pp = mail($to, $subject, $message,$headers);
-
-                if ($pp) {
-                    echo "Sent succesfully !";
-                } else {
-                    echo "Sent faild !";
-                }
-            }
-        }
-
-        if (isset($_POST["done"])) {
-            request_repair();
-        }
+        // put your code here
         ?>
-
     </body>
 </html>
