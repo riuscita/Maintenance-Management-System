@@ -11,19 +11,12 @@
         html,body,h1,h2,h3,h4,h5 {font-family: "Raleway", sans-serif}
     </style>
     <body class="w3-theme-l5" onload="loadFunc()">
-        <script>
-            function loadFunc(){
-                document.getElementById("uHomeName").innerHTML=sessionStorage.getItem('userName');
-                document.getElementById("userID").innerHTML+=sessionStorage.getItem('userID');
-                document.getElementById("userDsg").innerHTML+=sessionStorage.getItem('userDesg');
-            }
-        </script>
 
         <!-- Navbar -->
         <div class="w3-top">
             <div class="w3-bar w3-theme-d5 w3-right-align w3-large">
                 <a class="w3-bar-item w3-button w3-hide-medium w3-hide-large w3-right w3-padding-large w3-hover-white w3-large w3-theme-d2" href="javascript:void(0);" onclick="openNav()"><i class="fa fa-bars"></i></a>
-                <a href="#" class="w3-bar-item w3-button w3-padding-large w3-theme-d4" title="Acount"><i class="fa fa-user w3-margin-right"></i>User</a>
+                <a class="w3-bar-item w3-button w3-padding-large w3-theme-d4" title="Acount" onclick="document.getElementById('settings').style.display='block'"  ><i class="fa fa-user w3-margin-right"></i>User</a>
                 <a href="#" class="w3-bar-item w3-button w3-hide-small w3-right w3-padding-large w3-hover-white" title="Settings"><i class="fa fa-circle-o-notch"></i></a>
                 <a href="#" class="w3-bar-item w3-button w3-hide-small w3-right w3-padding-large w3-hover-white" title="Reports"><i class="fa fa-globe"></i></a>
                 <div class="w3-dropdown-hover w3-hide-small w3-left">
@@ -58,7 +51,8 @@
                             <p class="w3-center"><img src="images/u2.jpg" class="w3-circle" style="height:106px;width:106px" alt="Avatar"></p>
                             <hr>
                             <p id="userID"> <i class="fa fa-bars fa-fw w3-margin-right w3-text-theme"></i>University ID  : </p>
-                            <p id="userDsg"><i class="fa fa-user fa-fw w3-margin-right w3-text-theme"></i>Designation : </p>
+                            <p><i class="fa fa-user fa-fw w3-margin-right w3-text-theme"></i>Designation : <text class="w3-text" id="userDsg"></text></p>
+                            <p><i class="fa fa-users fa-fw w3-margin-right w3-text-theme"></i>Department : <text class="w3-text" id="userDep"></text></p>
                         </div>
                     </div>
                     <br>
@@ -74,30 +68,8 @@
                             <div id="Demo2" class="w3-hide w3-container">
                                 <p>Some other text..</p>
                             </div>
-                            <button onclick="myFunction('Demo3')" class="w3-button w3-block w3-theme-l1 w3-left-align"><i class="fa fa-users fa-fw w3-margin-right"></i> My Profile</button>
-                            <div id="Demo3" class="w3-hide w3-container">
-                                <div class="w3-row-padding">
-                                    <br>
-                                    <div class="w3-half">
-                                        <img src="/w3images/lights.jpg" style="width:100%" class="w3-margin-bottom">
-                                    </div>
-                                    <div class="w3-half">
-                                        <img src="/w3images/nature.jpg" style="width:100%" class="w3-margin-bottom">
-                                    </div>
-                                    <div class="w3-half">
-                                        <img src="/w3images/mountains.jpg" style="width:100%" class="w3-margin-bottom">
-                                    </div>
-                                    <div class="w3-half">
-                                        <img src="/w3images/forest.jpg" style="width:100%" class="w3-margin-bottom">
-                                    </div>
-                                    <div class="w3-half">
-                                        <img src="/w3images/nature.jpg" style="width:100%" class="w3-margin-bottom">
-                                    </div>
-                                    <div class="w3-half">
-                                        <img src="/w3images/fjords.jpg" style="width:100%" class="w3-margin-bottom">
-                                    </div>
-                                </div>
-                            </div>
+                            <button onclick="document.getElementById('settings').style.display='block'" class="w3-button w3-block w3-theme-l1 w3-left-align"><i class="fa fa-users fa-fw w3-margin-right"></i> My Profile</button>
+
                         </div>      
                     </div>
                     <br>
@@ -111,36 +83,16 @@
                             <div class="w3-card-2 w3-round w3-white">
                                 <div class="w3-container w3-padding">
                                     <h6 class="w3-opacity">Ongoing maintenance tasks</h6>
-                                    <table class="w3-table w3-bordered">
-                                        <col width="25%">
-                                        <col width="50%">
-                                        <col width="25%">
+                                    <table class="w3-table w3-bordered" id="reqTable">
+                                        <col width="20%">
+                                        <col width="20%">
+                                        <col width="40%">
+                                        <col width="20%">
                                         <tr class="w3-theme-d5">
                                             <th>Request Name</th>
+                                            <th>Date</th>
                                             <th>Progress</th>
                                             <th>Status</th>
-                                        </tr>
-                                        <tr>
-                                            <td>Jill</td>
-                                            <td><div class="w3-light-grey w3-round-xlarge">
-                                                    <div class="w3-container w3-grey w3-round-xlarge" style="width:25%">25%</div>
-                                                </div></td>
-                                            <td>Supervised</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Eve</td>
-                                            <td>Jackson</td>
-                                            <td>94</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Adam</td>
-                                            <td>Johnson</td>
-                                            <td>67</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Adam</td>
-                                            <td>Johnson</td>
-                                            <td>67</td>
                                         </tr>
                                     </table>
                                 </div>
@@ -148,56 +100,34 @@
                         </div>
                     </div>
 
-                    <div class="w3-container w3-padding w3-card-2 w3-white w3-round w3-margin" id="history">
+                    <div class="w3-container w3-padding w3-card-2 w3-white w3-round w3-margin" id="comReq">
+                        <h6 class="w3-opacity">Completed requests</h6>
+                        <table class="w3-table" id="feedback">
+                            <col width="90%">
+                            <col width="10%">
+
+                        </table>
+                    </div>
+
+                    <div class="w3-container w3-padding w3-card-2 w3-white w3-round w3-margin">
                         <h6 class="w3-opacity">My History</h6>
-                        <table class="w3-table w3-bordered">
+                        <table class="w3-table w3-bordered" id="comTable">
                             <tr class="w3-theme-d2">
                                 <th>Request Name</th>
                                 <th>Requested Data</th>
                                 <th>Completed Date</th>
                                 <th>Feedback</th>
                             </tr>
-                            <tr>
-                                <td>Jill</td>
-                                <td><div class="w3-light-grey w3-round-xlarge">
-                                        <div class="w3-container w3-grey w3-round-xlarge" style="width:25%">25%</div>
-                                    </div></td>
-                                <td>Supervised</td>
-                            </tr>
-                            <tr>
-                                <td>Eve</td>
-                                <td>Jackson</td>
-                                <td>94</td>
-                            </tr>
-                            <tr>
-                                <td>Adam</td>
-                                <td>Johnson</td>
-                                <td>67</td>
-                            </tr>
-                            <tr>
-                                <td>Adam</td>
-                                <td>Johnson</td>
-                                <td>67</td>
-                            </tr>
                         </table>
                     </div>
-                    
-                    <div class="w3-container w3-padding w3-card-2 w3-white w3-round w3-margin" id="comReq">
-                        <h6 class="w3-opacity">Completed requests</h6>
-                        <p><span class="w3-badge w3-green">1</span> Tap maintenance</p>
-                        <p><input class="w3-input w3-padding-10 w3-border" type="text" placeholder="Write some feedback ..."></p>
-                        <p><span class="w3-badge w3-green">2</span> Tap maintenance</p>
-                        <p><input class="w3-input w3-padding-10 w3-border" type="text" placeholder="Write some feedback ..."></p>
-                        <p><span class="w3-badge w3-green">3</span> Tap maintenance</p>
-                        <p><input class="w3-input w3-padding-10 w3-border" type="text" placeholder="Write some feedback ..."></p>
-                    </div>
+
                 </div>
                 <!-- Right Column -->
                 <div class="w3-col m2">
                     <div class="w3-card-2 w3-round w3-white w3-center">
                         <div class="w3-container">
                             <p>Have a maintenence request ?</p>
-                            <p><button class="w3-button w3-block w3-theme-l4">Create new request</button></p>
+                            <p><button class="w3-button w3-block w3-theme-l4" onclick="document.getElementById('createReq').style.display='block'">Create new request</button></p>
                         </div>
                     </div>
                     <br>
@@ -211,6 +141,205 @@
         </div>
         <br>
 
+        <!-- Profile Settings Modal -->
+        <div id="settings" class="w3-modal">
+            <div class="w3-modal-content w3-animate-zoom">
+                <div class="w3-container w3-theme-d5">
+                    <span onclick="document.getElementById('settings').style.display='none'" class="w3-button w3-display-topright w3-large">x</span>
+                    <h1>Profile Settings</h1>
+                </div>
+                <div class="w3-container">
+                    <p>Change your profile settings:</p>
+                    <form>
+                        <p><input class="w3-input w3-padding-16 w3-border" id="name" required name="name"></p>
+                        <p class="w3-input w3-padding-16 w3-border" id="uid" required name="uid"></p>
+                        <p><select class="w3-select w3-padding-16 w3-border" id="dsg" required name="dsg" onchange="selectBox()">
+                                <option value="" disabled selected>Choose your designation</option>
+                                <option value="Lecturer">Lecturer</option>
+                                <option value="Visiting Lecturer">Visiting Lecturer</option>
+                                <option value="Junior Lecturer">Junior Lecturer</option>
+                                <option value="Lab Assistant">Lab Assistant</option>
+                                <option value="Office worker">Office worker</option>
+                            </select></p>
+                        <p><select class="w3-select w3-padding-16 w3-border" id="dep" required name="dep" onchange="selectDep()">
+                                <option value="" disabled selected>Choose your department</option>
+                                <option value="CSE">CSE</option>
+                                <option value="ENTC">ENTC</option>
+                                <option value="Electrical">Electrical</option>
+                                <option value="Civil">Civil</option>
+                                <option value="Mech">Mech</option>
+                                <option value="Chemical">Chemical</option>
+                                <option value="Material">Material</option>
+                            </select></p>
+                        <p><input class="w3-input w3-padding-16 w3-border" type="password" placeholder="Type a new password" id="password" required name="psw"></p>
+                        <p><input class="w3-input w3-padding-16 w3-border" type="password" placeholder="Re type Password" id="repassword" required name="rpsw"></p>
+                        <p><button class="w3-button" type="button" name="updateBtn" onclick="update(this.form)">Save Changes</button></p>
+
+                        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+                        <script type ="text/javascript" language="javascript">
+                            function update(form){
+                                var ps=document.getElementById('password').value;
+                                var rps=document.getElementById('repassword').value;
+                                var uidt=document.getElementById('uid').innerHTML;
+                                var namet=document.getElementById('name').value;
+                                var dsge=document.getElementById("dsg").value;
+                                var depe=document.getElementById("dep").value;
+                                
+                                if(ps==rps){
+                                    if(!$.trim(ps)){
+                                        ps=sessionStorage.getItem('userPass');
+                                    }
+                                    var myData = {"uid": uidt, "name": namet,"dsg":dsge,"psw":ps,"dep":depe};
+                                    $.ajax({
+                                        url: "updateAction.php",
+                                        type: "POST",
+                                        data: myData,
+                                        success: function(data) {
+                                            $("#responseDiv").html(data);
+                                        }  
+                                    });
+
+                                    document.getElementById('settings').style.display='none';
+                                    document.getElementById('message').style.display='block';
+                                }else{
+                                    document.getElementById('error').style.display='block';
+                                }
+                            }
+                        </script>
+
+                    </form>
+                </div>
+            </div>
+        </div>
+
+
+        <!-- Create Request Modal -->
+        <div id="createReq" class="w3-modal">
+            <div class="w3-modal-content w3-animate-zoom">
+                <div class="w3-container w3-theme-d5">
+                    <span onclick="document.getElementById('createReq').style.display='none'" class="w3-button w3-display-topright w3-large">x</span>
+                    <h1>Create new request</h1>
+                </div>
+                <div class="w3-container">
+                    <p>Create Maintenance Assistance Request:</p>
+                    <form>
+                        <p><select class="w3-select w3-padding-16 w3-border" id="type" required name="type">
+                                <option value="" disabled selected>Choose your request type</option>
+                                <option value="Electrical">Electrical</option>
+                                <option value="Civil">Civil</option>
+                                <option value="">Plumbing</option>
+                            </select></p>
+                        <p><input class="w3-input w3-padding-16 w3-border" id="desc" required name="desc"></p>
+                        <p><button class="w3-button" type="button" name="updateBtn" onclick="addRequest()">Submit</button></p>
+
+                        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+                        <script type ="text/javascript" language="javascript">
+                            function addRequest(){
+                                var d=new Date();
+                                var rrid=getRID()+1;                            
+                                var rid=rrid.toString();
+                                var m=d.getMonth()+1;
+                                var dd=d.getFullYear().toString()+"-"+m.toString()+"-"+d.getDate().toString();
+                                var depe=document.getElementById('dep').value;
+                                var typee=document.getElementById('type').value;
+                                var desce=document.getElementById('desc').value;
+                                var uide=document.getElementById('uid').innerHTML;
+                                var status='submitted';
+                                var myData = {"action":"createRequest","rid":rid,"date":dd,"dep":depe,"type":typee,"desc":desce,"uid":uide,"status":status};
+                                $.ajax({
+                                    url: "userRequestListAction.php",
+                                    type: "POST",
+                                    data: myData,
+                                    success: function(data) {
+                                        //$("#responseDiv").html(data);
+                                        document.getElementById('createReq').style.display='none';
+                                        document.getElementById('message').style.display='block';
+                                    }  
+                                });
+
+                            }
+                            function getRID(){
+                                var myData={"action":"getLastRecord"};
+                                $.ajax({
+                                    url: "userRequestListAction.php",
+                                    type: "POST",
+                                    data: myData,
+                                    success: function(data) {
+                                        rData=parseInt(data);
+                                        return (rData)
+                                    }  
+                                });
+                                return rData;
+                            }
+                            
+                            function refreshHistory(){
+                                var idt=document.getElementById('uid').innerHTML;
+                
+                                var myData = {'action':"getLatestRecord","luid": idt};
+                                $.ajax({
+                                    url: "userRequestListAction.php",
+                                    type: "POST",
+                                    data: myData,
+                                    success: function(ref) {
+                                        //$("#responseDiv").html(data);
+                                        $("#reqTable").append(ref);
+                        
+                                    }  
+                                });
+                            }
+                        </script>
+
+                    </form>
+                </div>
+            </div>
+        </div>
+
+
+        <!-- Message Modal -->
+        <div id="message" class="w3-modal">
+            <div class="w3-modal-content w3-animate-zoom">
+                <div class="w3-container w3-black">
+                    <span onclick="document.getElementById('message').style.display='none'" class="w3-button w3-display-topright w3-large">x</span>
+                    <h1>Success</h1>
+                </div>
+                <div class="w3-container">
+                    <p>Your maintenance request sent..</p>
+                    <p><button class="w3-button" type="button" name="loginBtn" onclick="msgLogin()">ok</button></p>
+
+                    <script>
+                        function msgLogin(){
+                            document.getElementById('message').style.display='none';
+                            refreshHistory();
+                        }
+                    </script>
+                </div>
+            </div>
+        </div>
+
+        <!-- Error Modal -->
+        <div id="error" class="w3-modal">
+            <div class="w3-modal-content w3-animate-zoom">
+                <div class="w3-container w3-black">
+                    <span onclick="document.getElementById('error').style.display='none'" class="w3-button w3-display-topright w3-large">x</span>
+                    <h1>Error</h1>
+                </div>
+                <div class="w3-container">
+                    <p>Sorry , your maintenance request did not send. Please try again</p>
+                    <p><button class="w3-button" type="button" name="okBtn" onclick="errorFunc()">ok</button></p>
+                    <p><button class="w3-button" type="button" name="cancelBtn" onclick="cancelFunc()">cancel</button></p>
+
+                    <script>
+                        function errorFunc(){
+                            document.getElementById('error').style.display='none';
+                        }
+                        function cancelFunc(){
+                            document.getElementById('error').style.display='none';
+                        }
+                    </script>
+                </div>
+            </div>
+        </div>
+
         <!-- Footer -->
         <footer class="w3-container w3-theme-d3 w3-padding-16">
             <h5>Footer</h5>
@@ -219,7 +348,131 @@
         <footer class="w3-container w3-theme-d5">
             <p>Powered by <a href="https://www.polyvore.com" target="_blank">riuscita</a></p>
         </footer>
-        
+
+        <script>
+            function loadFunc(){
+                document.getElementById("userID").innerHTML+=sessionStorage.getItem('userID');
+                document.getElementById('uid').innerHTML=sessionStorage.getItem('userID');
+                loadHistory();
+                refresh();
+                loadCompletedHistory();
+                loadFeedbackInput();
+            }
+            
+            function refresh(){
+                var idt=document.getElementById('uid').innerHTML;
+                
+                var myData = {"luid": idt};
+                $.ajax({
+                    url: "loginAction.php",
+                    type: "POST",
+                    data: myData,
+                    success: function(res) {
+                        //$("#responseDiv").html(data);
+                                            
+                        var ar=res.split('|');
+                        
+                        document.getElementById("uHomeName").innerHTML=ar[0];
+                        document.getElementById("userDsg").innerHTML=ar[1];
+                        document.getElementById("userDep").innerHTML=ar[3];
+                
+                        document.getElementById('name').value=ar[0];
+                        document.getElementById("dsg").value=ar[1];
+                        document.getElementById("dep").value=ar[3];             
+                    }  
+                });
+                
+            }
+            
+            function loadHistory(){
+                var idt=document.getElementById('uid').innerHTML;
+                
+                var myData = {'action':"getAllRecords",'luid': idt};
+                $.ajax({
+                    url: "userRequestListAction.php",
+                    type: "POST",
+                    data: myData,
+                    success: function(res) {
+                        //$("#responseDiv").html(data);
+                        $("#reqTable").append(res);
+                        
+                    }  
+                });
+            }
+            
+            function loadCompletedHistory(){
+                var idt=document.getElementById('uid').innerHTML;
+                var nn="<center><img src='images/173841-200.png' width='10%' height:='10%'/><p>No completed requests yet...</p></center>";
+                
+                var myData = {'action':"getCompletedRequests",'luid': idt};
+                $.ajax({
+                    url: "userRequestListAction.php",
+                    type: "POST",
+                    data: myData,
+                    success: function(res) {
+                        //$("#responseDiv").html(data);
+                        if(!$.trim(res)){
+                            
+                            $("#comTable").html(nn);
+                        }else{
+                            $("#comTable").append(res);
+                        }
+                        
+                        
+                    }  
+                });
+            }
+            
+            function loadFeedbackInput(){
+                var idt=document.getElementById('uid').innerHTML;
+                var nn="<center><img src='images/173841-200.png' width='10%' height:='10%'/><p>No completed requests yet...</p></center>";
+                
+                var myData = {'action':"getFeedbackList",'luid': idt};
+                $.ajax({
+                    url: "userRequestListAction.php",
+                    type: "POST",
+                    data: myData,
+                    success: function(res) {
+                        //$("#responseDiv").html(data);
+                        if(!$.trim(res)){
+                            
+                            $("#feedback").html(nn);
+                        }else{
+                            $("#feedback").append(res);
+                        }
+                        
+                        
+                    }  
+                });
+            }
+            
+            function sendFeedback(rid,fdbi){
+                var val=document.getElementById("fd"+fdbi).value;
+                var fr="#"+"fd"+fdbi;
+                if(val!=""){
+                    var myData = {'action':"logFeedback",'lrid': rid,'fdb':val};
+                    $.ajax({
+                        url: "userRequestListAction.php",
+                        type: "POST",
+                        data: myData,
+                        success: function(res) {
+                            var f=document.getElementById("fd"+fdbi);
+                            var b=document.getElementById("bt"+fdbi);
+                            var t=document.getElementById("tx"+fdbi);
+                            f.style.display='none';
+                            b.style.display='none';
+                            t.className += " w3-show";
+                            loadCompletedHistory();
+                        }  
+                    });    
+                }else{
+                    alert("Please enter feedback")
+                }
+            }
+            
+        </script>
+
+
     </body>
 </html> 
 
