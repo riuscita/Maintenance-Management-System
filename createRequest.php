@@ -136,9 +136,6 @@
     }
 </script>
 
-</body>
-</html>
-
 <?php
 /**
  * Created by PhpStorm.
@@ -146,5 +143,12 @@
  * Date: 04-Jul-17
  * Time: 10:09 PM
  */
+
+
 ?>
 
+</body>
+
+
+
+</html>
