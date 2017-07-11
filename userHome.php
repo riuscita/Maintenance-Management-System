@@ -7,15 +7,20 @@
     <link rel="stylesheet" href="https://www.w3schools.com/lib/w3-theme-blue-grey.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
     <style>
         html,body,h1,h2,h3,h4,h5 {font-family: "Raleway", sans-serif}
     </style>
-    <body class="w3-theme-l5" onload="loadFunc()">
+    <body>
+    <div class="w3-theme-l5" onload="loadFunc()">
         <script>
             function loadFunc(){
                 document.getElementById("uHomeName").innerHTML=sessionStorage.getItem('userName');
                 document.getElementById("userID").innerHTML+=sessionStorage.getItem('userID');
                 document.getElementById("userDsg").innerHTML+=sessionStorage.getItem('userDesg');
+            }
+            function () {
+                
             }
         </script>
 
@@ -55,7 +60,7 @@
                     <div class="w3-card-2 w3-round w3-white">
                         <div class="w3-container">
                             <h4 id="uHomeName" class="w3-center"></h4>
-                            <p class="w3-center"><img src="images/u2.jpg" class="w3-circle" style="height:106px;width:106px" alt="Avatar"></p>
+                            <p class="w3-center"><img src="images/userlogin.png" class="w3-circle" style="height:106px;width:106px" alt="Avatar"></p>
                             <hr>
                             <p id="userID"> <i class="fa fa-bars fa-fw w3-margin-right w3-text-theme"></i>University ID  : </p>
                             <p id="userDsg"><i class="fa fa-user fa-fw w3-margin-right w3-text-theme"></i>Designation : </p>
@@ -194,10 +199,10 @@
                 </div>
                 <!-- Right Column -->
                 <div class="w3-col m2">
-                    <div class="w3-card-2 w3-round w3-white w3-center">
+                    <div class="w3-card-2 w3-round w3-white w3-center" >
                         <div class="w3-container">
                             <p>Have a maintenence request ?</p>
-                            <p><button class="w3-button w3-block w3-theme-l4">Create new request</button></p>
+                            <p><a href="createRequest.php" class="w3-button w3-block w3-theme-l4" >Create new request</a></p>
                         </div>
                     </div>
                     <br>
@@ -211,6 +216,7 @@
         </div>
         <br>
 
+
         <!-- Footer -->
         <footer class="w3-container w3-theme-d3 w3-padding-16">
             <h5>Footer</h5>
@@ -219,7 +225,13 @@
         <footer class="w3-container w3-theme-d5">
             <p>Powered by <a href="https://www.polyvore.com" target="_blank">riuscita</a></p>
         </footer>
-        
+
+
+
+
+    </div>
+
+
     </body>
 </html> 
 
