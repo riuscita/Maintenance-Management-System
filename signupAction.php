@@ -17,8 +17,9 @@ $uid = $_POST['uid'];
 $name = $_POST['name'];
 $dsg = $_POST['dsg'];
 $psw = $_POST['psw'];
+$dep = $_POST['dep'];
 
-$sql = "INSERT INTO user_table VALUES('$uid','$name','$dsg','$psw')";
+$sql = "INSERT INTO user_table VALUES('$uid','$name','$dsg','$psw','$dep')";
 $sq = mysql_query($sql);
 
 if ($sq) {

@@ -15,11 +15,18 @@ if (!$con) {
 
 $uid = $_POST['luid'];
 
-$sql = "SELECT PASSWORD FROM user_table WHERE UID='$uid'";
+$sql = "SELECT * FROM user_table WHERE UID=$uid";
 $rst = mysql_query($sql);
 
+$displayString="";
 if (mysql_num_rows($rst)>0){
-    echo mysql_result($rst, 0);
+    $row = mysql_fetch_array($rst);
+    $displayString .= "$row[USER_NAME]|";
+    $displayString .= "$row[DESIGNATION]|";
+    $displayString .= "$row[PASSWORD]|";
+    $displayString .= "$row[DEPARTMENT]|";
+    echo $displayString;
+    //echo mysql_result($rst, 0);
 }else{
     echo NULL;
 }

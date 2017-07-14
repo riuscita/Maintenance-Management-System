@@ -57,6 +57,16 @@
                                 <option value="Junior Lecturer">Junior Lecturer</option>
                                 <option value="Lab Assistant">Lab Assistant</option>
                                 <option value="Office worker">Office worker</option>
+                                <option value="HOD">HOD</option>
+                            </select></p>
+                        <p><select class="w3-select w3-padding-16 w3-border" id="dep" required name="dep" onchange="selectDep()">
+                                <option value="" disabled selected>Choose your department</option>
+                                <option value="CSE">CSE</option>
+                                <option value="ENTC">ENTC</option>
+                                <option value="Civil">Civil</option>
+                                <option value="Mech">Mech</option>
+                                <option value="Chemical">Chemical</option>
+                                <option value="Material">Material</option>
                             </select></p>
                         <p><input class="w3-input w3-padding-16 w3-border" type="password" placeholder="Type a password" id="password" required name="psw"></p>
                         <p><input class="w3-input w3-padding-16 w3-border" type="password" placeholder="Re type Password" id="repassword" required name="rpsw"></p>
@@ -70,15 +80,17 @@
                                 var uidt=document.getElementById('uid').value;
                                 var namet=document.getElementById('name').value;
                                 var dsge=document.getElementById("dsg").value;
+                                var depe=document.getElementById("dep").value;
                                 
                                 document.getElementById('password').value="";
                                 document.getElementById('repassword').value="";
                                 document.getElementById('uid').value="";
                                 document.getElementById('name').value="";
                                 document.getElementById("dsg").value="";
+                                document.getElementById("dep").value="";
                                 
                                 if(ps==rps){
-                                    var myData = {"uid": uidt, "name": namet,"dsg":dsge,"psw":ps};
+                                    var myData = {"uid": uidt, "name": namet,"dsg":dsge,"psw":ps,"dep":depe};
                                     $.ajax({
                                         url: "signupAction.php",
                                         type: "POST",
@@ -135,8 +147,23 @@
                                         if (!$.trim(res)){
                                             alert('no such user..');
                                         }else{
-                                            if ($.trim(res)==ps){
-                                                alert("Sucess");
+                                            
+                                            var ar=res.split('|');
+                                            //$.trim(res)
+                                            if ($.trim(ar[2])==ps){
+                                                //alert(ar);
+                                                sessionStorage.setItem('userName',ar[0]);
+                                                sessionStorage.setItem('userID',idt);
+                                                sessionStorage.setItem('userDesg',ar[1]);
+                                                sessionStorage.setItem('userDep',ar[3]);
+                                                sessionStorage.setItem('userPass',ar[2]);
+                                                if (ar[1]=='HOD'){
+                                                    window.location.href="http://localhost/testPHP/HODHome.php";
+                                                }else{
+                                                    window.location.href="http://localhost/testPHP/userHome.php#";
+                                                }
+                                                
+                                                
                                             }else{
                                                 alert("Incorrect password");
                                                 document.getElementById('login').style.display='none';
