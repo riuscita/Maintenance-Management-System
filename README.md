@@ -5,10 +5,12 @@ Company : Riuscita
 
 MONO is an online system in which the maintenance requests can be made online and the maintenance department can assign the work for the laborers and manage their work. It contains differnet levels of officials in the process of completing a maintenece work.
 
-We have used :
-•	Frond end: 	HTML
-			        CSS
-              Javascript
-•	Back end: 	PHP
+### Built with
 
-•	Database:	MySQL
+* Frond end - 	HTML, CSS, Javascript
+* Back end  -	PHP
+* Database  -	MySQL
+
+## License
+
+This project is licensed under the Apache License - see the [LICENSE.md](LICENSE.md) file for details
