@@ -13,4 +13,4 @@ MONO is an online system in which the maintenance requests can be made online an
 
 ## License
 
-This project is licensed under the Apache License - see the [LICENSE.md](LICENSE.md) file for details
+This project is licensed under the Apache License - see the [LICENSE.md](https://github.com/riuscita/Maintenance-Management-System/blob/master/LICENSE) file for details
