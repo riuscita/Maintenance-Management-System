@@ -105,19 +105,6 @@
                             </tr>
                         </table>
                     </div>
-					
-
-                </div>
-                <!-- 
-                <div class="w3-col m2">
-                    <div class="w3-card-2 w3-round w3-white w3-center">
-                        <div class="w3-container">
-                            <p>Have a maintenence request ?</p>
-                            <p><button class="w3-button w3-block w3-theme-l4" onclick="document.getElementById('createReq').style.display='block'">Create new request</button></p>
-                        </div>
-                    </div>
-                    <br>
-                -->
                 </div>
 
                 <!-- End Grid -->
@@ -346,13 +333,13 @@
             var reqt=false;
             
             function loadFunc(){
-                document.getElementById("userID").innerHTML+=sessionStorage.getItem('userID');
-                document.getElementById('uid').innerHTML=sessionStorage.getItem('userID');
+                document.getElementById("userID").innerHTML+=localStorage.getItem('userID');
+                document.getElementById('uid').innerHTML=localStorage.getItem('userID');
                 refresh();
                 loadHistory();
                 loadSubmittedRequests();
                 loadMyHistory();
-                setInterval(getLatestReq, 1000);
+                //setInterval(getLatestReq, 1000);
             }
             
             function refresh(){
@@ -384,7 +371,7 @@
                 
                 var myData = {'action':"getHistory",'luid': idt};
                 $.ajax({
-                    url: "HODAction.php",
+                    url: "SuperintendentAction.php",
                     type: "POST",
                     data: myData,
                     success: function(res) {
@@ -409,7 +396,7 @@
                 
                 var myData = {'action':"getMyHistory",'luid': idt};
                 $.ajax({
-                    url: "HODAction.php",
+                    url: "SuperintendentAction.php",
                     type: "POST",
                     data: myData,
                     success: function(res) {
@@ -431,9 +418,9 @@
             function loadSubmittedRequests(){
                 var nn="<center><img src='images/173841-200.png' width='10%' height:='10%'/><p>No submitted requests yet...</p></center>";
                 
-                var myData = {'action':"getRequestList",'lrid':llrid};
+                var myData = {'action':"getWECheckedList",'lrid':llrid};
                 $.ajax({
-                    url: "HODAction.php",
+                    url: "SuperintendentAction.php",
                     type: "POST",
                     data: myData,
                     success: function(res) {
@@ -479,7 +466,7 @@
                 
                 var myData = {'action':"logRecommendation",'lrid': rid,'luid':idt,'choice':choice,'des':des,'date':dte};
                 $.ajax({
-                    url: "HODAction.php",
+                    url: "SuperintendentAction.php",
                     type: "POST",
                     data: myData,
                     success: function(res) {
@@ -489,17 +476,37 @@
                         ds.style.display='none';
                         u.style.display='none';
                         dt.style.display='none';
-                        refreshHistory();
+                        if(choice!='decline'){
+                            refreshHistory();
+                        }else{
+                            refreshDeclineHistory();
+                        }
+                        
                     }  
                 });
             }
+            
+            function refreshDeclineHistory(){
+                var idt=document.getElementById('uid').innerHTML;
+                
+                var myData = {'action':"getLatestDeclinedRecord","luid": idt};
+                $.ajax({
+                    url: "SuperintendentAction.php",
+                    type: "POST",
+                    data: myData,
+                    success: function(ref) {
+                        $("#hisTable").append(ref);
+                    }  
+                });
+            }
+            
             
             function refreshHistory(){
                 var idt=document.getElementById('uid').innerHTML;
                 
                 var myData = {'action':"getLatestRecord","luid": idt};
                 $.ajax({
-                    url: "HODAction.php",
+                    url: "SuperintendentAction.php",
                     type: "POST",
                     data: myData,
                     success: function(ref) {
@@ -511,7 +518,7 @@
             function getLatestReq(){
                 var myData = {'action':"getRequestList","lrid": llrid};
                 $.ajax({
-                    url: "HODAction.php",
+                    url: "SuperintendentAction.php",
                     type: "POST",
                     data: myData,
                     success: function(res) {

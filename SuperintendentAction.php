@@ -54,7 +54,29 @@ function getAllRecords() {
 
 function getLatestRecord() {
     $uid = $_POST['luid'];
-    $sql = "SELECT * FROM request_table WHERE STATUS='recommended' ORDER BY RID DESC LIMIT 1";
+    $sql = "SELECT * FROM request_table WHERE STATUS='STChecked' ORDER BY RID DESC LIMIT 1";
+    $rst = mysql_query($sql);
+    
+
+    if (mysql_num_rows($rst) > 0) {
+        $displayString = "";
+        $row = mysql_fetch_array($rst);
+        $uname=  getUserName($row['UID']);
+        $displayString.='<tr>';
+        $displayString.='<td>' . $row["DES"] . '</td>';
+        $displayString.='<td>' . $uname . '</td>';
+        $displayString.='<td>' . $row["STATUS"] . '</td>';
+        $displayString.='</tr>';
+
+        echo $displayString;
+    } else {
+        echo '';
+    }
+}
+
+function getLatestDeclinedRecord() {
+    $uid = $_POST['luid'];
+    $sql = "SELECT * FROM request_table WHERE STATUS='rejected' AND STID='$uid' ORDER BY RID DESC LIMIT 1";
     $rst = mysql_query($sql);
     
 
@@ -86,7 +108,7 @@ function getHistory() {
     $uid = $_POST['luid'];
 
     $sql = "SELECT request_table.DES,request_table.STATUS,user_table.USER_NAME FROM request_table INNER JOIN user_table ON request_table.UID=user_table.uid
-        WHERE HODID=$uid";
+        WHERE STID=$uid";
     $rst = mysql_query($sql);
 
     $displayString = "";
@@ -152,16 +174,16 @@ function logRecommendation() {
     $msg = "";
 
     if ($ch == 'accept') {
-        $sql = "UPDATE request_table SET HODID='$uid',STATUS='WEChecked' WHERE RID='$rid'";
+        $sql = "UPDATE request_table SET STID='$uid',STATUS='STChecked' WHERE RID='$rid'";
         $msg = "Superintendent accepted " . $ds;
     } else {
-        $sql = "UPDATE request_table SET STATUS='rejected' WHERE RID='$rid'";
+        $sql = "UPDATE request_table SET STID='$uid',STATUS='rejected' WHERE RID='$rid'";
         $msg = "Superintendent rejected " . $ds;
     }
 
     $sq = mysql_query($sql);
     if ($sq) {
-        notify($uuid, $msg, $date,$rid,'Superintendent');
+        //notify($uuid, $msg, $date,$rid,'Superintendent');
         echo 'success';
     } else {
         echo 'faild';
@@ -326,7 +348,7 @@ if ($action == 'getAllRecords') {
 } elseif ($action == 'getHistory') {
     getHistory();
 } elseif ($action == 'getWECheckedList') {
-    getRequestList();
+    getWECheckedList();
 } elseif ($action == 'logRecommendation') {
     logRecommendation();
 } elseif ($action == 'getLastRecord') {
@@ -339,5 +361,9 @@ if ($action == 'getAllRecords') {
     getLatestMyRecord();
 } elseif ($action == 'getMyHistory') {
     getMyHistory();
+}elseif ($action == 'getLatestDeclinedRecord') {
+    getLatestDeclinedRecord();
 }
+
+
 ?>
