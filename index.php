@@ -12,7 +12,7 @@
         body,h1,h5 {font-family: "Raleway", sans-serif}
         body, html {height: 100%}
         .bgimg {
-            background-image: url("images/one.jpeg");
+            background-image: url("images/five.jpeg");
             min-height: 100%;
             background-position: center;
             background-size: cover;
@@ -20,21 +20,21 @@
     </style>
 
 
-    <body>
+    <body onload="load()">
 
-        <div class="bgimg w3-display-container w3-text-black w3-border-white">
-            <div class="w3-display-middle w3-jumbo">
-                <p>MONO ⛌ </p>
-
+        <div class="bgimg w3-display-container w3-text-dark-grey w3-border-white">
+            <div class="w3-display-middle">
+                <p class="w3-jumbo" style="line-height: 0">MONO ⛌ </p>
+                <p class="w3-large w3-text-dark-gray w3-centered" style="line-height: 0">We love to maintain little things....</p>
             </div>
+
             <div class="w3-display-topleft w3-container w3-xlarge">
                 <p><button onclick="document.getElementById('signup').style.display='block'" class="w3-button w3-black">sign up</button></p>
                 <p><button onclick="document.getElementById('login').style.display='block'" class="w3-button w3-black">login</button></p>
             </div>
-            <div class="w3-display-bottomleft w3-container w3-text-white">
-                <p class="w3-xlarge">monday - friday 10-23 | saturday 14-02</p>
-                <p class="w3-large">42 village St, New York</p>
-                <p>powered by <a href="https://www.polyvore.com" target="_blank">riuscita</a></p>
+            <div class="w3-display-bottomleft w3-container w3-text-dark-grey">
+
+                <p class="w3-large">powered by <a href="https://www.polyvore.com" target="_blank">riuscita</a></p>
             </div>
         </div>
 
@@ -48,37 +48,122 @@
                 <div class="w3-container">
                     <p>Please fill this form:</p>
                     <form>
-                        <p><input class="w3-input w3-padding-16 w3-border" type="text" placeholder="Name" id="name" required name="name"></p>
-                        <p><input class="w3-input w3-padding-16 w3-border" type="number" placeholder="University ID" id="uid" required name="uid"></p>
-                        <p><select class="w3-select w3-padding-16 w3-border" id="dsg" required name="dsg" onchange="selectBox()">
+                        <p><input class="w3-input w3-padding-16 w3-border" type="text" placeholder="Name" id="name" required name="name" onchange="validatePsw()"></p>
+                        <p><input class="w3-input w3-padding-16 w3-border" type="text" placeholder="University ID" onchange="validateIndex(this.value)" id="uid" required name="uid" onchange="validatePsw()"></p>
+                        <p><select class="w3-select w3-padding-16 w3-border" id="dsg" required name="dsg" onchange="validatePsw()">
                                 <option value="" disabled selected>Choose your designation</option>
                                 <option value="Lecturer">Lecturer</option>
                                 <option value="Visiting Lecturer">Visiting Lecturer</option>
                                 <option value="Junior Lecturer">Junior Lecturer</option>
                                 <option value="Lab Assistant">Lab Assistant</option>
                                 <option value="Office worker">Office worker</option>
+                                <option value="HOD">HOD</option>
                             </select></p>
-                        <p><input class="w3-input w3-padding-16 w3-border" type="password" placeholder="Type a password" id="password" required name="psw"></p>
-                        <p><input class="w3-input w3-padding-16 w3-border" type="password" placeholder="Re type Password" id="repassword" required name="rpsw"></p>
-                        <p><button class="w3-button" type="button" name="signupBtn" onclick="msg(this.form)">Done</button></p>
+                        <p><select class="w3-select w3-padding-16 w3-border" id="dep" required name="dep" onchange="validatePsw()">
+                                <option value="" disabled selected>Choose your department</option>
+                                <option value="CSE">CSE</option>
+                                <option value="ENTC">ENTC</option>
+                                <option value="Civil">Civil</option>
+                                <option value="Mech">Mech</option>
+                                <option value="Chemical">Chemical</option>
+                                <option value="Material">Material</option>
+                            </select></p>
+                        <p><input class="w3-input w3-padding-16 w3-border" type="password" placeholder="Type a password" id="password" required name="psw" onchange="validatePsw()"></p>
+                        <p><input class="w3-input w3-padding-16 w3-border" type="password" placeholder="Re type Password" id="repassword" required name="rpsw" onchange="validatePsw()"></p>
+                        <p><button class="w3-button" type="button" name="signupBtn" onclick="msg(this.form)" id="inpBtn">Done</button>
+                            <span class="w3-text w3-margin-left" style="color:red" id="alertTxt"></span>
+                        </p>
 
                         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
                         <script type ="text/javascript" language="javascript">
+                            
+                            function load(){
+                                document.getElementById("inpBtn").disabled=true;
+                            }
+                            function validatePsw(){
+                                var ps=document.getElementById('password').value;
+                                var rps=document.getElementById('repassword').value;
+                                var uidt=document.getElementById('uid').value;
+                                var namet=document.getElementById('name').value;
+                                var dsge=document.getElementById("dsg").value;
+                                var depe=document.getElementById("dep").value;
+                                
+                                /*if((ps==val)&& (uidt!=null)&&(namet!=null)&&(dsge!="")&& (depe!="")){
+                                    alert("EXO");
+                                    document.getElementById("inpBtn").disabled=false;
+                                }*/
+                                
+                                var alt=document.getElementById("alertTxt");
+                                
+                                if(namet!=''){
+                                    if(uidt!=''){
+                                        if(dsge!=""){
+                                            if(depe!=""){
+                                                if(ps==rps){
+                                                    document.getElementById("inpBtn").disabled=false;
+                                                }else{
+                                                    alt.innerHTML+=" Please retype your password correctly";
+                                                    document.getElementById("inpBtn").disabled=true;
+                                                }
+                                            }else{
+                                                alt.innerHTML+=" Please select your department";
+                                                document.getElementById("inpBtn").disabled=true;
+                                            }
+                                        }else{
+                                            alt.innerHTML+=" Please select your designation";
+                                            document.getElementById("inpBtn").disabled=true;
+                                        }
+                                    }else{
+                                        alt.innerHTML+=" Please provide your index number";
+                                        document.getElementById("inpBtn").disabled=true;
+                                    }
+                                }else{
+                                    alt.innerHTML+=" Please provide your name";
+                                    document.getElementById("inpBtn").disabled=true;
+
+                                }
+                                
+                            }
+                            
+                            function validateIndex(val){
+                                var rst=/^(\d{0,4})$/.test(val); 
+                                if(!rst){
+                                    //alert("Please provide the index correctly");
+                                    var ee=document.getElementById("uid");
+                                    ee.style.backgroundColor="#ff4d4d";
+                                    document.getElementById("inpBtn").disabled=true;
+                                    
+                                    var alt=document.getElementById("alertTxt");
+                                    alt.innerHTML="Please provide the index correctly";
+                                    
+                                }else{
+                                    var ee=document.getElementById("uid");
+                                    ee.style.backgroundColor="white";
+                                    var alt=document.getElementById("alertTxt");
+                                    alt.innerHTML="";
+                                }
+                            }
+                            
                             function msg(form){
                                 var ps=document.getElementById('password').value;
                                 var rps=document.getElementById('repassword').value;
                                 var uidt=document.getElementById('uid').value;
                                 var namet=document.getElementById('name').value;
                                 var dsge=document.getElementById("dsg").value;
+                                var depe=document.getElementById("dep").value;
+                                
+                                var ee=document.getElementById("nn");
+                                ee.style.backgroundColor="red";
                                 
                                 document.getElementById('password').value="";
                                 document.getElementById('repassword').value="";
                                 document.getElementById('uid').value="";
                                 document.getElementById('name').value="";
                                 document.getElementById("dsg").value="";
+                                document.getElementById("dep").value="";
                                 
                                 if(ps==rps){
-                                    var myData = {"uid": uidt, "name": namet,"dsg":dsge,"psw":ps};
+                                    var myData = {"uid": uidt, "name": namet,"dsg":dsge,"psw":ps,"dep":depe};
                                     $.ajax({
                                         url: "signupAction.php",
                                         type: "POST",
@@ -135,8 +220,25 @@
                                         if (!$.trim(res)){
                                             alert('no such user..');
                                         }else{
-                                            if ($.trim(res)==ps){
-                                                alert("Sucess");
+                                            
+                                            var ar=res.split('|');
+                                            //$.trim(res)
+                                            if ($.trim(ar[2])==ps){
+                                                //alert(ar);
+                                                sessionStorage.setItem('userName',ar[0]);
+                                                sessionStorage.setItem('userID',idt);
+                                                sessionStorage.setItem('userDesg',ar[1]);
+                                                sessionStorage.setItem('userDep',ar[3]);
+                                                sessionStorage.setItem('userPass',ar[2]);
+                                                alert(ar[4]);
+                                                
+                                                if (ar[1]=='HOD'){
+                                                    window.location.href="http://localhost/testPHP/HODHome.php";
+                                                }else{
+                                                    window.location.href="http://localhost/testPHP/userHome.php#";
+                                                }
+                                                
+                                                
                                             }else{
                                                 alert("Incorrect password");
                                                 document.getElementById('login').style.display='none';
@@ -197,9 +299,5 @@
             </div>
         </div>
 
-
-        <?php
-        // put your code here
-        ?>
     </body>
 </html>
